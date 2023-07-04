@@ -44,9 +44,7 @@ a {
     margin: 0 20px;
 }
 
-#wrapper .inner #header ul li:hover {
-    background: #eee;
-}
+
 
 #banner img {
     width: 100%;
@@ -82,9 +80,7 @@ a {
     width: 200px;
 }
 
-.posts img:hover {
-    transform: translateX(600px);
-}
+
 
 #menu ul {
     display: flex;
@@ -95,9 +91,7 @@ a {
     margin: 0 30px;
 }
 
-#menu ul li a:hover {
-    background: #eee;
-}
+
 
 .flex article {
     width: 60%;

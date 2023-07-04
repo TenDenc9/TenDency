@@ -73,14 +73,6 @@ a {
     justify-content: space-around;
 }
 
-.posts .flex img {
-    transition: all 1s;
-}
-
-.posts .flex img:hover {
-    transform: scale(1.05);
-}
-
 .major h2 {
     text-align: center;
 }
@@ -97,12 +89,4 @@ a {
     justify-content: center;
     margin: 0 auto;
     transition: all 1s;
-}
-
-#banner .image img:hover {
-    transform: scale(1.05);
-}
-
-a:hover {
-    color: #8cb6fe;
 }
