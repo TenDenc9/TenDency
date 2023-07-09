@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>消除黑点游戏</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        #game-area {
+            width: 400px;
+            height: 400px;
+            border: 1px solid black;
+            position: relative;
+        }
+
+        #black-dot {
+            width: 20px;
+            height: 20px;
+            background-color: black;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        #timer {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+
+        #score {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+    </style>
+</head>
+<body>
+<h1>消除黑点游戏</h1>
+<div id="game-area">
+    <div id="black-dot"></div>
+</div>
+<div>
+    <button id="start-button">开始</button>
+    <button id="pause-button">暂停</button>
+    <button id="resume-button">继续</button>
+    <button id="restart-button">重新开始</button>
+</div>
+<div>
+    <span id="timer">剩余时间：60秒</span>
+    <span id="score">得分：0</span>
+</div>
+<script>
+    var gameArea = document.getElementById("game-area");
+    var blackDot = document.getElementById("black-dot");
+    var timer = document.getElementById("timer");
+    var score = document.getElementById("score");
+    var interval;
+    var timeLeft = 60;
+    var scoreCount = 0;
+
+    function startGame() {
+        interval = setInterval(function () {
+            var x = Math.floor(Math.random() * (gameArea.offsetWidth - blackDot.offsetWidth));
+            var y = Math.floor(Math.random() * (gameArea.offsetHeight - blackDot.offsetHeight));
+            blackDot.style.left = x + "px";
+            blackDot.style.top = y + "px";
+        }, 1000);
+
+        var countdown = setInterval(function () {
+            timeLeft--;
+            timer.innerHTML = "剩余时间：" + timeLeft + "秒";
+            if (timeLeft == 0) {
+                clearInterval(countdown);
+                clearInterval(interval);
+                alert("游戏结束！您的得分为：" + scoreCount);
+            }
+        }, 1000);
+    }
+
+    function pauseGame() {
+        clearInterval(interval);
+    }
+
+    function resumeGame() {
+        interval = setInterval(function () {
+            var x = Math.floor(Math.random() * (gameArea.offsetWidth - blackDot.offsetWidth));
+            var y = Math.floor(Math.random() * (gameArea.offsetHeight - blackDot.offsetHeight));
+            blackDot.style.left = x + "px";
+            blackDot.style.top = y + "px";
+        }, 1000);
+    }
+
+    function restartGame() {
+        clearInterval(interval);
+        clearInterval(countdown);
+        timeLeft = 60;
+        scoreCount = 0;
+        timer.innerHTML = "剩余时间：" + timeLeft + "秒";
+        updateScore();
+    }
+
+    function updateScore() {
+        score.innerHTML = "得分：" + scoreCount;
+    }
+
+    var startButton = document.getElementById("start-button");
+    startButton.addEventListener("click", startGame);
+
+    var pauseButton = document.getElementById("pause-button");
+    pauseButton.addEventListener("click", pauseGame);
+
+    var resumeButton = document.getElementById("resume-button");
+    resumeButton.addEventListener("click", resumeGame);
+
+    var restartButton = document.getElementById("restart-button");
+    restartButton.addEventListener("click", restartGame);
+
+    blackDot.addEventListener("click", function () {
+        scoreCount++;
+        updateScore();
+    });
+
+
+</script>
